@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_mainLayout";
+}
+@model List<User>
+
+@section CardHeader {
+    <h2>All Users</h2>
+}
+@section CardBody {
+
+    <a href="/Users/Register" class=" btn btn-outline-secondary">New</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td>UserName</td>
+                <td>Password</td>
+                <td>CreatedAt</td>
+                <td>IsActive</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Password</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@item.IsActive</td>
+                    <td>
+                        <form asp-action="ToggleUserActivation" asp-controller="Users" method="post">
+                            <input type="hidden" name="UserId" value="@item.UserId" />
+                            @if (item.IsActive)
+                            {
+                                <button type="submit" class="btn btn-danger">Deactivate</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success">Activate</button>
+                            }
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "_mainLayout";
+}
+@model List<Employee>
+
+@section CardHeader {
+    <h2>All Employees</h2>
+}
+@section CardBody {
+
+ <a href="/Employees/Create" class=" btn btn-outline-secondary">New</a>
+
+  <table class="table">
+  <thead>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Passwored</td>
+        <td>Action</td>
+    </tr>
+  </thead>
+
+  <tbody>
+       @foreach(var item in Model)
+       {
+         <tr>
+           <td>@item.Id</td>
+           <td>@item.Name</td>
+           <td>@item.Email</td>
+           <td>@item.Passwored</td>
+           <td>
+               <a asp-controller="Employees" asp-action="Edit" asp-route-id="@item.Id" >Edit</a>
+               <a asp-controller="Employees" asp-action="Delete" asp-route-id="@item.Id" class="ms-3">Delete</a>
+           </td>
+         </tr>
+       }
+           
+
+  </tbody>
+</table>
+}
